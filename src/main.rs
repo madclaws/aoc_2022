@@ -1,4 +1,5 @@
 mod day1;
+mod day2;
 mod tools;
 use std::env;
 fn main() {
@@ -7,6 +8,7 @@ fn main() {
     println!("Advent of Code 2022");
     match day {
         1 => day1::run(),
+        2 => day2::run(),
         _ => panic!("Invalid day"),
     }
 }

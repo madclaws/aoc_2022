@@ -1,7 +1,7 @@
 use crate::tools;
 
 pub fn run() {
-    println!("\nDay 1: Calorie Counting\n");
+    println!("\n --- Day 1: Calorie Counting --- \n");
 
     let input = tools::load_file("/home/madclaws/labs/aoc_2022/data/day1_a.txt");
 
