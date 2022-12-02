@@ -19,5 +19,6 @@ pub fn run() {
         .collect::<Vec<i32>>();
 
     calories_sums.sort_by(|a, b| b.cmp(a));
-    println!("A) How many total Calories is that Elf carrying? => {:?} Kcal\n", calories_sums[0]);
+    println!("A) Find the Elf carrying the most Calories.\nHow many total Calories is that Elf carrying? => {:?} Kcal\n", calories_sums[0]);
+    println!("B) Find the top three Elves carrying the most Calories.\nHow many Calories are those Elves carrying in total? => {:?} Kcal", calories_sums[0] + calories_sums[1] + calories_sums[2]);
 }
