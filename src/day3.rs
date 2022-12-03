@@ -3,9 +3,8 @@ pub fn run() {
     println!("\n --- Day 3: Rucksack Reorganization ---\n");
 
     let input = tools::load_file("/home/madclaws/labs/aoc_2022/data/day3.txt");
-    
+
     let rucksacks = input.split('\n').collect::<Vec<&str>>();
-    println!("{:?}\n", rucksacks);
 
     let priority_sum = rucksacks
         .iter()
@@ -27,8 +26,7 @@ fn get_string_diffs(compartments: (&str, &str)) -> i32 {
     let diffs = str1
         .chars()
         .map(|char1| str2_list.iter().find(|char2| **char2 == char1))
-        .filter(|option_chars| option_chars.is_some())
-        .map(|valid_diffs| valid_diffs.unwrap())
+        .flatten()
         .map(|valid_char| {
             if (*valid_char as i32) < 97 {
                 ((*valid_char as i32) - 65) + 27
