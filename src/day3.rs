@@ -17,7 +17,7 @@ pub fn run() {
         .sum::<i32>();
 
     println!(
-        "Find the sum of item type that appears in both compartments of each rucksack=> {}",
+        "Find the sum of item type that appears in both compartments of each rucksack => {}\n",
         priority_sum
     );
 
@@ -31,7 +31,7 @@ pub fn run() {
         .sum::<i32>();
 
     println!(
-        "Find the sum of item type that corresponds to the badges of each three-Elf group. => {:?}",
+        "Find the sum of item type that corresponds to the badges of each three-Elf group => {:?} \n",
         chunked_sum
     );
 }
