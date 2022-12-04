@@ -16,7 +16,24 @@ pub fn run() {
         .iter()
         .sum::<i32>();
 
-    println!("Priority sum => {}", priority_sum);
+    println!(
+        "Find the sum of item type that appears in both compartments of each rucksack=> {}",
+        priority_sum
+    );
+
+    let chucked_ruck = rucksacks.chunks(3).collect::<Vec<&[&str]>>();
+
+    let chunked_sum = chucked_ruck
+        .iter()
+        .map(|chucks| get_string_diffs_v2(chucks))
+        .collect::<Vec<i32>>()
+        .iter()
+        .sum::<i32>();
+
+    println!(
+        "Find the sum of item type that corresponds to the badges of each three-Elf group. => {:?}",
+        chunked_sum
+    );
 }
 
 fn get_string_diffs(compartments: (&str, &str)) -> i32 {
@@ -25,8 +42,7 @@ fn get_string_diffs(compartments: (&str, &str)) -> i32 {
 
     let diffs = str1
         .chars()
-        .map(|char1| str2_list.iter().find(|char2| **char2 == char1))
-        .flatten()
+        .filter_map(|char1| str2_list.iter().find(|char2| **char2 == char1))
         .map(|valid_char| {
             if (*valid_char as i32) < 97 {
                 ((*valid_char as i32) - 65) + 27
@@ -35,5 +51,29 @@ fn get_string_diffs(compartments: (&str, &str)) -> i32 {
             }
         })
         .collect::<Vec<i32>>();
+    diffs[0]
+}
+
+fn get_string_diffs_v2(chucked_rucks: &[&str]) -> i32 {
+    let str1 = chucked_rucks[0];
+    let str2 = chucked_rucks[1];
+    let str3 = chucked_rucks[2];
+
+    let str2_list = str2.chars().collect::<Vec<char>>();
+    let str3_list = str3.chars().collect::<Vec<char>>();
+
+    let diffs = str1
+        .chars()
+        .filter_map(|char1| str2_list.iter().find(|char2| **char2 == char1))
+        .filter_map(|char2| str3_list.iter().find(|char3| *char2 == **char3))
+        .map(|valid_char| {
+            if (*valid_char as i32) < 97 {
+                ((*valid_char as i32) - 65) + 27
+            } else {
+                ((*valid_char as i32) - 97) + 1
+            }
+        })
+        .collect::<Vec<i32>>();
+
     diffs[0]
 }
