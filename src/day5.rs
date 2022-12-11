@@ -27,9 +27,9 @@ pub fn run() {
     let mut stack_list = stacks_string.split('\n').collect::<Vec<&str>>();
 
     let mut stacks: Vec<Vec<&str>> = Vec::new();
-    
+
     stack_list.pop();
-    
+
     stack_list.iter().fold(0, |acc: i32, stack| {
         let str_stack = stack.split(" ").collect::<Vec<&str>>();
         stacks.push(str_stack);
@@ -75,7 +75,8 @@ pub fn run() {
 
     apply_instructions(&mut stack_pointerz, &instruction_list, "9000");
 
-    let top_stacks = stack_pointerz.iter()
+    let top_stacks = stack_pointerz
+        .iter()
         .map(|c| *c.last().unwrap())
         .collect::<Vec<&str>>()
         .join("");
@@ -84,14 +85,13 @@ pub fn run() {
 
     apply_instructions(&mut stack_pointer_clone, &instruction_list, "9001");
 
-    
-    let top_stacks = stack_pointer_clone.iter()
-    .map(|c| *c.last().unwrap())
-    .collect::<Vec<&str>>()
-    .join("");
-    
-    println!("After the rearrangement procedure completes, what crate ends up on top of each stack on crate 9001? => {:?}", top_stacks);
+    let top_stacks = stack_pointer_clone
+        .iter()
+        .map(|c| *c.last().unwrap())
+        .collect::<Vec<&str>>()
+        .join("");
 
+    println!("After the rearrangement procedure completes, what crate ends up on top of each stack on crate 9001? => {:?}", top_stacks);
 }
 
 fn create_instruction_set(instructions: &str) -> Vec<Instructions> {
@@ -109,16 +109,21 @@ fn create_instruction_set(instructions: &str) -> Vec<Instructions> {
         })
 }
 
-fn apply_instructions(stack_pointer: &mut [Vec<&str>], instruction_list: &[Instructions], crate_mover: &str) {
-    instruction_list.iter()
-        .fold(0, |acc, instruction| {
-            let from_stack = &mut stack_pointer[instruction.from_stack as usize  - 1];
-            let mut popped_items = from_stack.drain(from_stack.len() - (instruction.move_count as usize)..).collect::<Vec<&str>>();
-            let to_stack = &mut stack_pointer[instruction.to_stack as usize - 1];
-            if crate_mover == "9000" {
-                popped_items.reverse();
-            }
-            to_stack.append(&mut popped_items);
-            acc
-        });
+fn apply_instructions(
+    stack_pointer: &mut [Vec<&str>],
+    instruction_list: &[Instructions],
+    crate_mover: &str,
+) {
+    instruction_list.iter().fold(0, |acc, instruction| {
+        let from_stack = &mut stack_pointer[instruction.from_stack as usize - 1];
+        let mut popped_items = from_stack
+            .drain(from_stack.len() - (instruction.move_count as usize)..)
+            .collect::<Vec<&str>>();
+        let to_stack = &mut stack_pointer[instruction.to_stack as usize - 1];
+        if crate_mover == "9000" {
+            popped_items.reverse();
+        }
+        to_stack.append(&mut popped_items);
+        acc
+    });
 }
