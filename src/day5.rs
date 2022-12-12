@@ -31,7 +31,7 @@ pub fn run() {
     stack_list.pop();
 
     stack_list.iter().fold(0, |acc: i32, stack| {
-        let str_stack = stack.split(" ").collect::<Vec<&str>>();
+        let str_stack = stack.split(' ').collect::<Vec<&str>>();
         stacks.push(str_stack);
         acc
     });

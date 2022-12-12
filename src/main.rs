@@ -1,4 +1,5 @@
 #![feature(slice_partition_dedup)]
+#![feature(control_flow_enum)]
 mod day1;
 mod day2;
 mod day3;
